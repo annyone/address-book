@@ -7,10 +7,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace address_book
+namespace address_book_tests
 {
     [TestFixture]
-    public class CreateGroupTest
+    public class CreateGroupTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -40,7 +40,7 @@ namespace address_book
         }
 
         [Test]
-        public void CreateGroup()
+        public void CreateGroupTest()
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.Name("user")).Click();
