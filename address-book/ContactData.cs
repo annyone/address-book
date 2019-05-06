@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace address_book_tests
 {
-    class ContactData
+    public class ContactData
     {
         private string firstname, middlename, lastname, nickname, title, company, workaddress, 
             homephone, mobilephone, workphone, fax, email1, email2, email3, homepage, bday, 
