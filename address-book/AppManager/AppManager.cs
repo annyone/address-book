@@ -21,6 +21,9 @@ namespace address_book_tests
 
         public AppManager()
         {
+            driver = new ChromeDriver();
+            baseURL = "http://localhost/addressbook";
+
             userHelper = new UserHelper(driver);
             navHelper = new NavHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);

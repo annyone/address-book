@@ -11,7 +11,6 @@ namespace address_book_tests
 {
     public class NavHelper : BaseHelper
     {
-        //private IWebDriver driver;
         private string baseURL;
 
         public NavHelper(IWebDriver driver, string baseURL) 
