@@ -12,9 +12,9 @@ namespace address_book_tests
         [Test]
         public void CreateContactTest()
         {
-            navHelper.OpenHomePage();
-            userHelper.LogIn(new UserData("admin", "secret"));
-            contactHelper.CreateNewContact();
+            app.Nav.OpenHomePage();
+            app.User.LogIn(new UserData("admin", "secret"));
+            app.Contacts.CreateNewContact();
             ContactData contact = new ContactData("firstname", "lastname")
             {
                 Workaddress = "workaddress",
@@ -26,10 +26,10 @@ namespace address_book_tests
                 Email2 = "email2",
                 Email3 = "email3"
             };
-            contactHelper.FillNewContactForm(contact);
-            contactHelper.SubmitNewContactForm();
-            navHelper.OpenHomePage();
-            userHelper.LogOut();
+            app.Contacts.FillNewContactForm(contact);
+            app.Contacts.SubmitNewContactForm();
+            app.Nav.OpenHomePage();
+            app.User.LogOut();
         }
     }
 }

@@ -3,39 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
 namespace address_book_tests
 {
-    public class TestBase
+    public class AppManager
     {
         protected IWebDriver driver;
-        private StringBuilder verificationErrors;
         protected string baseURL;
 
         protected UserHelper userHelper;
         protected NavHelper navHelper;
         protected GroupHelper groupHelper;
-        protected ContactHepler contactHelper;
+        protected ContactHelper contactHelper;
 
-        [SetUp]
-        public void SetupTest()
+        public AppManager()
         {
-            driver = new ChromeDriver();
-            baseURL = "http://localhost/addressbook/";
-            verificationErrors = new StringBuilder();
-
             userHelper = new UserHelper(driver);
             navHelper = new NavHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHepler(driver);
+            contactHelper = new ContactHelper(driver);
         }
 
-        [TearDown]
-        public void TeardownTest()
+        public void Stop()
         {
             try
             {
@@ -45,7 +37,39 @@ namespace address_book_tests
             {
                 // Ignore errors if unable to close the browser
             }
-            Assert.AreEqual("", verificationErrors.ToString());
         }
+
+        public UserHelper User
+        {
+            get
+            {
+                return userHelper;
+            }
+        }
+
+        public NavHelper Nav
+        {
+            get
+            {
+                return navHelper;
+            }
+        }
+
+        public GroupHelper Gpoups
+        {
+            get
+            {
+                return groupHelper;
+            }
+        }
+
+        public ContactHelper Contacts
+        {
+            get
+            {
+                return contactHelper;
+            }
+        }
+
     }
 }

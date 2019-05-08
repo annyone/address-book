@@ -12,7 +12,8 @@ namespace address_book_tests
 {
     public class UserHelper : BaseHelper
     {
-        public UserHelper (IWebDriver driver) : base(driver) { }
+        public UserHelper (IWebDriver driver) 
+            : base(driver) { }
 
         public void LogIn(UserData user)
         {

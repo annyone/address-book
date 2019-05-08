@@ -14,7 +14,8 @@ namespace address_book_tests
         //private IWebDriver driver;
         private string baseURL;
 
-        public NavHelper(IWebDriver driver, string baseURL) : base(driver)
+        public NavHelper(IWebDriver driver, string baseURL) 
+            : base(driver)
         {
             this.baseURL = baseURL;
         }

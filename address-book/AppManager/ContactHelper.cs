@@ -9,9 +9,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace address_book_tests
 {
-    public class ContactHepler : BaseHelper
+    public class ContactHelper : BaseHelper
     {
-        public ContactHepler(IWebDriver driver) : base(driver) { }
+        public ContactHelper(IWebDriver driver) 
+            : base(driver) { }
 
         public void CreateNewContact()
         {

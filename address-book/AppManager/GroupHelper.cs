@@ -11,7 +11,8 @@ namespace address_book_tests
 {
     public class GroupHelper : BaseHelper
     {
-        public GroupHelper(IWebDriver driver) : base(driver) { }
+        public GroupHelper(IWebDriver driver) 
+            : base(driver) { }
 
         public void NewGroupForm()
         {
