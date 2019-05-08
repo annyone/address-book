@@ -17,26 +17,14 @@ namespace address_book_tests
         }
         public string Username
         {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
+            get { return name; }
+            set { name = value; }
         }
 
         public string Password
         {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
+            get { return password; }
+            set { password = value; }
         }
     }
 }

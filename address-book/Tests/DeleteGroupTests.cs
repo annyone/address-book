@@ -12,12 +12,7 @@ namespace address_book_tests
         [Test]
         public void DeleteGroupTest()
         {
-            app.Nav.OpenHomePage();
-            app.User.LogIn(new UserData("admin", "secret"));
-            app.Nav.OpenGroupsPage();
-            app.Gpoups.SelectGroup(1);
-            app.Gpoups.DeleteGroup();
-            app.Nav.ReturnToGroupsPage();
+            app.Groups.Delete(1); // порядковый номер
         }
     }
 }

@@ -12,14 +12,15 @@ namespace address_book_tests
         [Test]
         public void CreateGroupTest()
         {
-            app.Nav.OpenHomePage();
-            app.User.LogIn(new UserData("admin", "secret"));
-            app.Nav.OpenGroupsPage();
-            app.Gpoups.NewGroupForm();
-            app.Gpoups.FillNewGroupForm(new GroupData("a", "b", "c"));
-            app.Gpoups.SubmitNewGroupForm();
-            app.Nav.OpenGroupsPage();
-            app.User.LogOut();
-        }        
+            GroupData group = new GroupData("a", "b", "c");
+            app.Groups.Create(group);
+        }
+
+        [Test]
+        public void CreateGroupTestWithEmptyFields()
+        {
+            GroupData group = new GroupData("", "", "");
+            app.Groups.Create(group);
+        }
     }
 }

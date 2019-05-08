@@ -12,10 +12,10 @@ namespace address_book_tests
 {
     public class UserHelper : BaseHelper
     {
-        public UserHelper (IWebDriver driver) 
-            : base(driver) { }
+        public UserHelper (AppManager manager) 
+            : base(manager) { }
 
-        public void LogIn(UserData user)
+        public UserHelper LogIn(UserData user)
         {
             driver.FindElement(By.Name("user")).Click();
             driver.FindElement(By.Name("user")).Clear();
@@ -24,11 +24,15 @@ namespace address_book_tests
             driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys(user.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+
+            return this;
         }
 
-        public void LogOut()
+        public UserHelper LogOut()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+
+            return this;
         }
     }
 }

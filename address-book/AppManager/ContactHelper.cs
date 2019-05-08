@@ -11,15 +11,24 @@ namespace address_book_tests
 {
     public class ContactHelper : BaseHelper
     {
-        public ContactHelper(IWebDriver driver) 
-            : base(driver) { }
+        public ContactHelper(AppManager manager) 
+            : base(manager) { }
 
-        public void CreateNewContact()
+        public void Create(ContactData contact)
         {
-            driver.FindElement(By.LinkText("add new")).Click();
+            CreateNewContact();
+            FillNewContactForm(contact);
+            SubmitNewContactForm();
+            manager.Nav.OpenHomePage();
         }
 
-        public void FillNewContactForm(ContactData contact)
+        public ContactHelper CreateNewContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+
+        public ContactHelper FillNewContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -51,11 +60,13 @@ namespace address_book_tests
             driver.FindElement(By.Name("email3")).Click();
             driver.FindElement(By.Name("email3")).Clear();
             driver.FindElement(By.Name("email3")).SendKeys(contact.Email3);
+            return this;
         }
 
-        public void SubmitNewContactForm()
+        public ContactHelper SubmitNewContactForm()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            return this;
         }
     }
 }

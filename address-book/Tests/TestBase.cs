@@ -15,11 +15,14 @@ namespace address_book_tests
         public void SetupTest()
         {
             app = new AppManager();
+            app.Nav.OpenHomePage();
+            app.User.LogIn(new UserData("admin", "secret"));
         }
 
         [TearDown]
         public void TeardownTest()
         {
+            app.User.LogOut();
             app.Stop();
         }
     }

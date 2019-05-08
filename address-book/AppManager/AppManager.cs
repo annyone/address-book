@@ -24,10 +24,15 @@ namespace address_book_tests
             driver = new ChromeDriver();
             baseURL = "http://localhost/addressbook";
 
-            userHelper = new UserHelper(driver);
-            navHelper = new NavHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            userHelper = new UserHelper(this);
+            navHelper = new NavHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+        }
+
+        public IWebDriver Driver
+        {
+            get { return driver; }             
         }
 
         public void Stop()
@@ -44,35 +49,22 @@ namespace address_book_tests
 
         public UserHelper User
         {
-            get
-            {
-                return userHelper;
-            }
+            get { return userHelper; }
         }
 
         public NavHelper Nav
         {
-            get
-            {
-                return navHelper;
-            }
+            get { return navHelper; }
         }
 
-        public GroupHelper Gpoups
+        public GroupHelper Groups
         {
-            get
-            {
-                return groupHelper;
-            }
+            get { return groupHelper; }
         }
 
         public ContactHelper Contacts
         {
-            get
-            {
-                return contactHelper;
-            }
+            get { return contactHelper; }
         }
-
     }
 }
