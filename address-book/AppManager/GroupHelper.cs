@@ -18,8 +18,20 @@ namespace address_book_tests
         {
             manager.Nav.OpenGroupsPage();
             NewGroupForm();
-            FillNewGroupForm(group);
+            FillGroupForm(group);
             SubmitNewGroupForm();
+            manager.Nav.OpenGroupsPage();
+
+            return this;
+        }
+
+        public GroupHelper Edit(int id, GroupData newValue)
+        {
+            manager.Nav.OpenGroupsPage();
+            SelectGroup(id);
+            EditGroupForm();
+            FillGroupForm(newValue);
+            SubmitEditGroupForm();
             manager.Nav.OpenGroupsPage();
 
             return this;
@@ -42,7 +54,7 @@ namespace address_book_tests
             return this;
         }
 
-        public GroupHelper FillNewGroupForm(GroupData group)
+        public GroupHelper FillGroupForm(GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
@@ -64,6 +76,13 @@ namespace address_book_tests
             return this;
         }
 
+        public GroupHelper SubmitEditGroupForm()
+        {
+            driver.FindElement(By.Name("update")).Click();
+
+            return this;
+        }
+
         public GroupHelper DeleteGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
@@ -74,6 +93,13 @@ namespace address_book_tests
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+
+            return this;
+        }
+
+        public GroupHelper EditGroupForm()
+        {
+            driver.FindElement(By.Name("edit")).Click();
 
             return this;
         }
