@@ -15,12 +15,12 @@ namespace address_book_tests
         [Test]
         public void DeleteGroupTest()
         {
-            OpenHomePage();
-            LogIn(new UserData("admin", "secret"));
-            OpenGroupsPage();
-            SelectGroup(1);
-            DeleteGroup();
-            ReturnToGroupsPage();
+            navHelper.OpenHomePage();
+            userHelper.LogIn(new UserData("admin", "secret"));
+            navHelper.OpenGroupsPage();
+            groupHelper.SelectGroup(1);
+            groupHelper.DeleteGroup();
+            navHelper.ReturnToGroupsPage();
         }
     }
 }

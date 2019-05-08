@@ -12,14 +12,14 @@ namespace address_book_tests
         [Test]
         public void CreateGroupTest()
         {
-            OpenHomePage();
-            LogIn(new UserData("admin", "secret"));
-            OpenGroupsPage();
-            NewGroupForm();
-            FillNewGroupForm(new GroupData("a", "b", "c"));
-            SubmitNewGroupForm();
-            OpenGroupsPage();
-            LogOut();
+            navHelper.OpenHomePage();
+            userHelper.LogIn(new UserData("admin", "secret"));
+            navHelper.OpenGroupsPage();
+            groupHelper.NewGroupForm();
+            groupHelper.FillNewGroupForm(new GroupData("a", "b", "c"));
+            groupHelper.SubmitNewGroupForm();
+            navHelper.OpenGroupsPage();
+            userHelper.LogOut();
         }        
     }
 }
