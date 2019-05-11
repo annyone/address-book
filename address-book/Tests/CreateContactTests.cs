@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace address_book_tests
 {
     [TestFixture]
-    public class CreateContactTests : TestBase
+    public class CreateContactTests : AuthTestBase
     {
         [Test]
         public void CreateContactTest()
@@ -23,7 +23,6 @@ namespace address_book_tests
                 Email2 = "email2",
                 Email3 = "email3"
             };
-
             app.Contacts.Create(contact);
         }
     }

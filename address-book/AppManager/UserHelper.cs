@@ -7,7 +7,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-
 namespace address_book_tests
 {
     public class UserHelper : BaseHelper
@@ -15,24 +14,40 @@ namespace address_book_tests
         public UserHelper (AppManager manager) 
             : base(manager) { }
 
-        public UserHelper LogIn(UserData user)
+        public void LogIn(UserData user)
         {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(user.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(user.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            if (IsLoggedIn())
+            {
+                if (IsLoggedIn(user))
+                {
+                    return;
+                }
+                LogOut();
+            }
 
-            return this;
+            InputText(By.Name("user"), user.Username);
+            InputText(By.Name("pass"), user.Password);
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 
-        public UserHelper LogOut()
+        public void LogOut()
         {
-            driver.FindElement(By.LinkText("Logout")).Click();
+            if (IsLoggedIn())
+            {
+                driver.FindElement(By.LinkText("Logout")).Click();
+            }
+        }
 
-            return this;
+        public bool IsLoggedIn()
+        {
+            return IsElementPresent(By.Name("logout"));
+        }
+
+        public bool IsLoggedIn(UserData user)
+        {
+            return IsLoggedIn()
+                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
+                    == "(" + user.Username + ")";
         }
     }
 }

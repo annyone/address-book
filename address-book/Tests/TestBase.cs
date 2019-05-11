@@ -12,18 +12,9 @@ namespace address_book_tests
         protected AppManager app;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupAppManager()
         {
-            app = new AppManager();
-            app.Nav.OpenHomePage();
-            app.User.LogIn(new UserData("admin", "secret"));
-        }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            app.User.LogOut();
-            app.Stop();
+            app = AppManager.GetInstance();
         }
     }
 }

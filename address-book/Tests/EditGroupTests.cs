@@ -8,14 +8,20 @@ using NUnit.Framework;
 namespace address_book_tests
 {
     [TestFixture]
-    public class EditGroupTests : TestBase
+    public class EditGroupTests : AuthTestBase
     {
         [Test]
-        public void EditGroupTest()
+        public void EditGroupAllFields()
         {
             GroupData newValue = new GroupData("a1", "b1", "c1");
             app.Groups.Edit(1, newValue);
         }
 
+        [Test]
+        public void EditGroupHeader()
+        {
+            GroupData newValue = new GroupData("a2", null, null);
+            app.Groups.Edit(1, newValue);
+        }
     }
 }

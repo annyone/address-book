@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace address_book_tests
 {
     [TestFixture]
-    public class CreateGroupTests : TestBase
+    public class CreateGroupTests : AuthTestBase
     {
         [Test]
         public void CreateGroupTest()
