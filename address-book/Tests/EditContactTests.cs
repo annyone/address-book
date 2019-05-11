@@ -24,7 +24,7 @@ namespace address_book_tests
                 Email2 = "email2000",
                 Email3 = "email3000"
             };
-            app.Contacts.Edit(2, newValue);
+            app.Contacts.Edit(1, newValue);
         }
     }
 }

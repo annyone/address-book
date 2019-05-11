@@ -16,8 +16,7 @@ namespace address_book_tests
 
         internal void Edit(int id, ContactData newValue)
         {
-            SelectContact(id);
-            EditContact();
+            EditContactBtn(id);
             FillContactForm(newValue);
             SubmitEditContactForm();
             manager.Nav.OpenHomePage();
@@ -26,19 +25,19 @@ namespace address_book_tests
         public void Delete(int id)
         {
             SelectContact(id);
-            DeleteContact();
+            DeleteContactBtn();
             driver.SwitchTo().Alert().Accept();
         }
 
         public void Create(ContactData contact)
         {
-            CreateNewContact();
+            NewContactForm();
             FillContactForm(contact);
             SubmitNewContactForm();
             manager.Nav.OpenHomePage();
         }
 
-        public ContactHelper CreateNewContact()
+        public ContactHelper NewContactForm()
         {
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
@@ -98,15 +97,15 @@ namespace address_book_tests
             return this;
         }
 
-        public ContactHelper DeleteContact()
+        public ContactHelper DeleteContactBtn()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
 
             return this;
         }
-        public ContactHelper EditContact()
+        public ContactHelper EditContactBtn(int index)
         {
-            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
 
             return this;
         }
