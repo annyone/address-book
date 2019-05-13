@@ -24,12 +24,12 @@ namespace address_book_tests
         private AppManager()
         {
             driver = new ChromeDriver();
-            baseURL = "http://localhost/addressbook";
+            baseURL = "http://localhost/addressbook/";
 
             userHelper = new UserHelper(this);
             navHelper = new NavHelper(this, baseURL);
-            groupHelper = new GroupHelper(this);
-            contactHelper = new ContactHelper(this);
+            groupHelper = new GroupHelper(this, baseURL);
+            contactHelper = new ContactHelper(this, baseURL);
         }
 
         ~AppManager()
@@ -50,7 +50,7 @@ namespace address_book_tests
             {
                 AppManager newInstance = new AppManager();
                 newInstance.Nav.OpenHomePage();
-                app.Value = new AppManager();  
+                app.Value = newInstance;  
             }
 
             return app.Value;

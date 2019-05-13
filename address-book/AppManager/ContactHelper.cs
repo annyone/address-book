@@ -8,36 +8,65 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
 namespace address_book_tests
-{
+{ 
     public class ContactHelper : BaseHelper
     {
-        public ContactHelper(AppManager manager) 
-            : base(manager) { }
-
-        internal void Edit(int id, ContactData newValue)
+        private string baseURL;
+        public ContactHelper(AppManager manager, string baseURL) 
+            : base(manager)
         {
+            this.baseURL = baseURL;
+        }
+
+        public void Edit(int id, ContactData newValue)
+        {
+            manager.Nav.OpenHomePage();
+            if (driver.Url == baseURL
+                && !IsElementPresent(By.Name("entry")))
+            {
+                ContactData contact = new ContactData("firstname", "lastname")
+                {
+                    Workaddress = "workaddress",
+                    Homephone = "homephone",
+                    Mobilephone = "mobilephone",
+                    Workphone = "workphone",
+                    Fax = "fax",
+                    Email1 = "email1",
+                    Email2 = "email2",
+                    Email3 = "email3"
+                };
+                Create(contact);
+            }
             EditContactBtn(id);
             FillContactForm(newValue);
             SubmitEditContactForm();
             manager.Nav.OpenHomePage();
         }
 
-        public void Delete(int id)
+        public void Delete()
         {
-            SelectContact(id);
+            manager.Nav.OpenHomePage();
+            if (driver.Url == baseURL
+                && !IsElementPresent(By.Name("entry")))
+            {
+                ContactData contact = new ContactData("firstname", "lastname");
+                Create(contact);
+            }
+            
+            SelectContact(1);
             DeleteContactBtn();
             driver.SwitchTo().Alert().Accept();
         }
 
         public void Create(ContactData contact)
         {
-            NewContactForm();
+            NewContactBtn();
             FillContactForm(contact);
             SubmitNewContactForm();
             manager.Nav.OpenHomePage();
         }
 
-        public ContactHelper NewContactForm()
+        public ContactHelper NewContactBtn()
         {
             driver.FindElement(By.LinkText("add new")).Click();
             return this;

@@ -19,22 +19,30 @@ namespace address_book_tests
             this.baseURL = baseURL;
         }
 
-        public NavHelper OpenHomePage()
+        public void OpenHomePage()
         {
+            if (driver.Url == baseURL)
+            {
+                return;
+            }
             driver.Navigate().GoToUrl(baseURL);
-            return this;
+
         }
 
-        public NavHelper OpenGroupsPage()
+        public void OpenGroupsPage()
         {
+            if(driver.Url == baseURL + "/addressbook/group.php"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
+
             driver.FindElement(By.LinkText("groups")).Click();
-            return this;
         }
 
-        public NavHelper ReturnToGroupsPage()
+        public void ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
-            return this;
         }
     }
 }

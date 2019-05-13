@@ -13,7 +13,7 @@ namespace address_book_tests
         [Test]
         public void DeleteContactTest()
         {
-            app.Contacts.Delete(1);
+            app.Contacts.Delete();
         }
     }
 }

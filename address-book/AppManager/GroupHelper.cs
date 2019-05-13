@@ -11,43 +11,55 @@ namespace address_book_tests
 {
     public class GroupHelper : BaseHelper
     {
-        public GroupHelper(AppManager manager)
-            : base(manager) { }
+        private string baseURL;
+        public GroupHelper(AppManager manager, string baseURL)
+            : base(manager)
+        {
+            this.baseURL = baseURL;
+        }
 
         public GroupHelper Create(GroupData group)
         {
             manager.Nav.OpenGroupsPage();
-            NewGroupForm();
+            NewGroupBtn();
             FillGroupForm(group);
             SubmitNewGroupForm();
-            manager.Nav.OpenGroupsPage();
-
-            return this;
-        }
-
-        public GroupHelper Edit(int id, GroupData newValue)
-        {
-            manager.Nav.OpenGroupsPage();
-            SelectGroup(id);
-            EditGroupForm();
-            FillGroupForm(newValue);
-            SubmitEditGroupForm();
-            manager.Nav.OpenGroupsPage();
-
-            return this;
-        }
-
-        public GroupHelper Delete(int id)
-        {
-            manager.Nav.OpenGroupsPage();
-            SelectGroup(id);
-            DeleteGroup();
             manager.Nav.ReturnToGroupsPage();
 
             return this;
         }
 
-        public GroupHelper NewGroupForm()
+        public void Edit(int id, GroupData newValue)
+        {
+            manager.Nav.OpenGroupsPage();
+            if (driver.Url == baseURL + "group.php"
+                && !IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData group = new GroupData("a", "b", "c");
+                Create(group);
+            }
+            SelectGroup(id);
+            EditGroupBtn();
+            FillGroupForm(newValue);
+            SubmitEditGroupForm();
+            manager.Nav.OpenGroupsPage();
+        }
+
+        public void Delete(int id)
+        {
+            manager.Nav.OpenGroupsPage();
+            if (driver.Url == baseURL + "group.php"
+                && !IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData group = new GroupData("a", "b", "c");
+                Create(group);
+            }
+            SelectGroup(id);
+            DeleteGroupBtn();
+            manager.Nav.ReturnToGroupsPage();
+        }
+
+        public GroupHelper NewGroupBtn()
         {
             driver.FindElement(By.Name("new")).Click();
 
@@ -77,7 +89,7 @@ namespace address_book_tests
             return this;
         }
 
-        public GroupHelper DeleteGroup()
+        public GroupHelper DeleteGroupBtn()
         {
             driver.FindElement(By.Name("delete")).Click();
 
@@ -91,7 +103,7 @@ namespace address_book_tests
             return this;
         }
 
-        public GroupHelper EditGroupForm()
+        public GroupHelper EditGroupBtn()
         {
             driver.FindElement(By.Name("edit")).Click();
 
