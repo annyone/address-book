@@ -18,25 +18,18 @@ namespace address_book_tests
             this.baseURL = baseURL;
         }
 
-        public void Edit(int id, ContactData newValue)
+        public void IsContactExist()
         {
-            manager.Nav.OpenHomePage();
             if (driver.Url == baseURL
                 && !IsElementPresent(By.Name("entry")))
             {
-                ContactData contact = new ContactData("firstname", "lastname")
-                {
-                    Workaddress = "workaddress",
-                    Homephone = "homephone",
-                    Mobilephone = "mobilephone",
-                    Workphone = "workphone",
-                    Fax = "fax",
-                    Email1 = "email1",
-                    Email2 = "email2",
-                    Email3 = "email3"
-                };
+                ContactData contact = new ContactData("firstname", "lastname");
                 Create(contact);
             }
+        }
+
+        public void Edit(int id, ContactData newValue)
+        {
             EditContactBtn(id);
             FillContactForm(newValue);
             SubmitEditContactForm();
@@ -46,20 +39,15 @@ namespace address_book_tests
         public void Delete()
         {
             manager.Nav.OpenHomePage();
-            if (driver.Url == baseURL
-                && !IsElementPresent(By.Name("entry")))
-            {
-                ContactData contact = new ContactData("firstname", "lastname");
-                Create(contact);
-            }
-            
             SelectContact(1);
             DeleteContactBtn();
             driver.SwitchTo().Alert().Accept();
+            manager.Nav.OpenHomePage();
         }
 
         public void Create(ContactData contact)
         {
+            manager.Nav.OpenHomePage();
             NewContactBtn();
             FillContactForm(contact);
             SubmitNewContactForm();

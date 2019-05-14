@@ -18,6 +18,17 @@ namespace address_book_tests
             this.baseURL = baseURL;
         }
 
+        public void IsGroupExist()
+        {
+            if (driver.Url == baseURL + "group.php"
+               && !IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData group = new GroupData("a", "b", "c");
+                Create(group);
+            }
+            return;
+        }
+
         public GroupHelper Create(GroupData group)
         {
             manager.Nav.OpenGroupsPage();
@@ -32,12 +43,6 @@ namespace address_book_tests
         public void Edit(int id, GroupData newValue)
         {
             manager.Nav.OpenGroupsPage();
-            if (driver.Url == baseURL + "group.php"
-                && !IsElementPresent(By.Name("selected[]")))
-            {
-                GroupData group = new GroupData("a", "b", "c");
-                Create(group);
-            }
             SelectGroup(id);
             EditGroupBtn();
             FillGroupForm(newValue);

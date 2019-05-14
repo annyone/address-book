@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace address_book_tests
 {
@@ -24,6 +27,9 @@ namespace address_book_tests
                 Email2 = "email2000",
                 Email3 = "email3000"
             };
+
+            app.Nav.OpenHomePage();
+            app.Contacts.IsContactExist();
             app.Contacts.Edit(1, newValue);
         }
     }

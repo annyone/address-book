@@ -14,6 +14,8 @@ namespace address_book_tests
         public void EditGroupAllFields()
         {
             GroupData newValue = new GroupData("a1", "b1", "c1");
+            app.Nav.OpenGroupsPage();
+            app.Groups.IsGroupExist();
             app.Groups.Edit(1, newValue);
         }
 
@@ -21,6 +23,8 @@ namespace address_book_tests
         public void EditGroupHeader()
         {
             GroupData newValue = new GroupData("a2", null, null);
+            app.Nav.OpenGroupsPage();
+            app.Groups.IsGroupExist();
             app.Groups.Edit(1, newValue);
         }
     }

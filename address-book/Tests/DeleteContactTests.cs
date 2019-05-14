@@ -13,6 +13,8 @@ namespace address_book_tests
         [Test]
         public void DeleteContactTest()
         {
+            app.Nav.OpenHomePage();
+            app.Contacts.IsContactExist();
             app.Contacts.Delete();
         }
     }

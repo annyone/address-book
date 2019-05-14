@@ -12,6 +12,8 @@ namespace address_book_tests
         [Test]
         public void DeleteGroupTest()
         {
+            app.Nav.OpenGroupsPage();
+            app.Groups.IsGroupExist();
             app.Groups.Delete(1); // порядковый номер
         }
     }
