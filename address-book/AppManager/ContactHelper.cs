@@ -26,6 +26,7 @@ namespace address_book_tests
                 ContactData contact = new ContactData("firstname", "lastname");
                 Create(contact);
             }
+            return;
         }
 
         public void Edit(int id, ContactData newValue)
