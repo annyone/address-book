@@ -16,7 +16,13 @@ namespace address_book_tests
             GroupData newValue = new GroupData("a1", "b1", "c1");
             app.Nav.OpenGroupsPage();
             app.Groups.IsGroupExist();
-            app.Groups.Edit(1, newValue);
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Edit(0, newValue);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = newValue.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -25,7 +31,13 @@ namespace address_book_tests
             GroupData newValue = new GroupData("a2", null, null);
             app.Nav.OpenGroupsPage();
             app.Groups.IsGroupExist();
-            app.Groups.Edit(1, newValue);
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Edit(0, newValue);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = newValue.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

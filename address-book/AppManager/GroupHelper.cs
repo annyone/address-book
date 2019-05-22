@@ -18,6 +18,19 @@ namespace address_book_tests
             this.baseURL = baseURL;
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Nav.OpenGroupsPage();
+            ICollection<IWebElement> list = driver.FindElements(By.CssSelector("span.group"));
+            foreach(IWebElement item in list)
+            {
+                groups.Add(new GroupData(item.Text));
+            }
+
+            return groups;
+        }
+
         public void IsGroupExist()
         {
             if (driver.Url == baseURL + "group.php"
@@ -103,7 +116,7 @@ namespace address_book_tests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
 
             return this;
         }

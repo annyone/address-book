@@ -29,6 +29,19 @@ namespace address_book_tests
             return;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Nav.OpenHomePage();
+            ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement item in list)
+            {
+                contacts.Add(new ContactData(item.FindElement(By.XPath(".//td[2]")).Text, item.FindElement(By.XPath(".//td[3]")).Text));
+            }
+            System.Console.Out.Write(contacts);
+            return contacts;
+        }
+
         public void Edit(int id, ContactData newValue)
         {
             EditContactBtn(id);
@@ -91,7 +104,7 @@ namespace address_book_tests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
 
             return this;
         }

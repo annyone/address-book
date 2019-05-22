@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Threading;
 using NUnit.Framework;
 
@@ -23,7 +24,14 @@ namespace address_book_tests
                 Email2 = "email2",
                 Email3 = "email3"
             };
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
