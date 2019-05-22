@@ -145,12 +145,32 @@ namespace address_book_tests
                 return 1;
             }
 
-            if (Lastname.CompareTo(other.Lastname)==0)
+            if (Lastname.CompareTo(other.Lastname) == 0)
             {
                 return Firstname.CompareTo(other.Firstname);
             }
 
+            if (Lastname.CompareTo(other.Lastname) > 0)
+            {
+                return 1;
+            }
+
+            if (Lastname.CompareTo(other.Lastname) < 0)
+            {
+                return -1;
+            }
+
             return 0;
+        }
+
+        public override int GetHashCode()
+        {
+            return Lastname.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "Firstname=" + Firstname + " Lastname=" + Lastname;
         }
 
         public bool Equals(ContactData other)
@@ -165,7 +185,12 @@ namespace address_book_tests
                 return true;
             }
 
-            return Firstname == other.Firstname;
+            if ((Lastname == other.Lastname) && (Firstname == other.Firstname))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
