@@ -16,21 +16,19 @@ namespace address_book_tests
         [Test]
         public void EditContactTest()
         {
-            ContactData newValue = new ContactData("firstname000", "lastname000")
-            {
-                Workaddress = "workaddress000",
-                Homephone = "homephone000",
-                Mobilephone = "mobilephone000",
-                Workphone = "workphone000",
-                Fax = "fax000",
-                Email1 = "email1000",
-                Email2 = "email2000",
-                Email3 = "email3000"
-            };
+            ContactData newValue = new ContactData("firstname000", "lastname000");
 
             app.Nav.OpenHomePage();
             app.Contacts.IsContactExist();
-            app.Contacts.Edit(1, newValue);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Edit(0, newValue);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Lastname = newValue.Lastname;
+            oldContacts[0].Firstname = newValue.Firstname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

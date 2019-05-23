@@ -15,7 +15,14 @@ namespace address_book_tests
         {
             app.Nav.OpenHomePage();
             app.Contacts.IsContactExist();
-            app.Contacts.Delete();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Delete(0);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace address_book_tests
             ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
             foreach (IWebElement item in list)
             {
-                contacts.Add(new ContactData(item.FindElement(By.XPath(".//td[2]")).Text, item.FindElement(By.XPath(".//td[3]")).Text));
+                contacts.Add(new ContactData(item.FindElement(By.XPath(".//td[3]")).Text, item.FindElement(By.XPath(".//td[2]")).Text));
             }
             System.Console.Out.Write(contacts);
             return contacts;
@@ -50,10 +50,10 @@ namespace address_book_tests
             manager.Nav.OpenHomePage();
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
             manager.Nav.OpenHomePage();
-            SelectContact(1);
+            SelectContact(id);
             DeleteContactBtn();
             driver.SwitchTo().Alert().Accept();
             manager.Nav.OpenHomePage();
@@ -117,7 +117,7 @@ namespace address_book_tests
         }
         public ContactHelper EditContactBtn(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index+1) + "]")).Click();
 
             return this;
         }
