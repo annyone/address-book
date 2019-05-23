@@ -18,17 +18,22 @@ namespace address_book_tests
             this.baseURL = baseURL;
         }
 
+        private List<GroupData> groupCache = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Nav.OpenGroupsPage();
-            ICollection<IWebElement> list = driver.FindElements(By.CssSelector("span.group"));
-            foreach(IWebElement item in list)
+            if(groupCache == null)
             {
-                groups.Add(new GroupData(item.Text));
+                groupCache = new List<GroupData>();
+                manager.Nav.OpenGroupsPage();
+                ICollection<IWebElement> list = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement item in list)
+                {
+                    groupCache.Add(new GroupData(item.Text));
+                }
             }
 
-            return groups;
+            return new List<GroupData>(groupCache);
         }
 
         public void IsGroupExist()
@@ -77,6 +82,7 @@ namespace address_book_tests
             manager.Nav.ReturnToGroupsPage();
         }
 
+        //кнопки, формы
         public GroupHelper NewGroupBtn()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -96,6 +102,7 @@ namespace address_book_tests
         public GroupHelper SubmitNewGroupForm()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
 
             return this;
         }
@@ -103,6 +110,7 @@ namespace address_book_tests
         public GroupHelper SubmitEditGroupForm()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
 
             return this;
         }
@@ -110,6 +118,7 @@ namespace address_book_tests
         public GroupHelper DeleteGroupBtn()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCache = null;
 
             return this;
         }

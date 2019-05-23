@@ -8,12 +8,16 @@ namespace address_book_tests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string name;
-        private string header = "";
-        private string footer = "";
         public GroupData (string name)
         {
-            this.name = name;
+            Name = name;
+        }
+
+        public GroupData(string name, string header, string footer)
+        {
+            Name = name;
+            Header = footer;
+            Footer = footer;
         }
 
         public bool Equals(GroupData other)
@@ -31,11 +35,6 @@ namespace address_book_tests
             return Name == other.Name;
         }
 
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }
-
         public int CompareTo(GroupData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -46,31 +45,20 @@ namespace address_book_tests
             return Name.CompareTo(other.Name);
         }
 
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+
         public override string ToString()
         {
             return "name =" + Name;
         }
 
-        public GroupData(string name, string header, string footer)
-        {
-            this.name = name;
-            this.header = footer;
-            this.footer = footer;
-        }
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        public string Header
-        {
-            get { return header; }
-            set { header = value; }
-        }
-        public string Footer
-        {
-            get { return footer; }
-            set { footer = value; }
-        }
+        public string Name { get; set; }
+
+        public string Header { get; set; }
+
+        public string Footer { get; set; }
     }
 }

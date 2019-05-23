@@ -29,17 +29,21 @@ namespace address_book_tests
             return;
         }
 
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Nav.OpenHomePage();
-            ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement item in list)
+            if (contactCache == null)
             {
-                contacts.Add(new ContactData(item.FindElement(By.XPath(".//td[3]")).Text, item.FindElement(By.XPath(".//td[2]")).Text));
+                contactCache = new List<ContactData>();
+                manager.Nav.OpenHomePage();
+                ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement item in list)
+                {
+                    contactCache.Add(new ContactData(item.FindElement(By.XPath(".//td[3]")).Text, item.FindElement(By.XPath(".//td[2]")).Text));
+                }
             }
-            System.Console.Out.Write(contacts);
-            return contacts;
+            return new List<ContactData>(contactCache);
         }
 
         public void Edit(int id, ContactData newValue)
@@ -93,12 +97,14 @@ namespace address_book_tests
         public ContactHelper SubmitNewContactForm()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper SubmitEditContactForm()
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -112,6 +118,7 @@ namespace address_book_tests
         public ContactHelper DeleteContactBtn()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
 
             return this;
         }

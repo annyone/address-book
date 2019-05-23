@@ -12,19 +12,11 @@ namespace address_book_tests
         private string password;
         public UserData(string name, string password)
         {
-            this.name = name;
-            this.password = password;
+            Username = name;
+            Password = password;
         }
-        public string Username
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        public string Username { get; set; }
 
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
+        public string Password { get; set; }
     }
 }
