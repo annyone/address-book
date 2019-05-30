@@ -8,8 +8,6 @@ namespace address_book_tests
 {
     public class UserData
     {
-        private string name;
-        private string password;
         public UserData(string name, string password)
         {
             Username = name;

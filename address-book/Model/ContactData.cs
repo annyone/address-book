@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace address_book_tests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname, middlename, lastname, nickname, title, company, workaddress, 
-            homephone, mobilephone, workphone, fax, email1, email2, email3, homepage, bday, 
-            bmonth, byear, aday, amonth, ayear, homeaddress, phone2, notes;
+        private string allEmails, allPhones;
 
         public ContactData(string firstname, string lastname)
         {
@@ -85,7 +84,7 @@ namespace address_book_tests
 
         public string Company { get; set; }
 
-        public string Workaddress { get; set; }
+        public string Address { get; set; }
 
         public string Homephone { get; set; }
 
@@ -120,5 +119,58 @@ namespace address_book_tests
         public string Phone2 { get; set; }
 
         public string Notes { get; set; }
+
+        public string AllPhones
+        {
+            get
+            {
+                if(allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (Clean(Homephone + "\r\n" + Mobilephone + "\r\n" + Workphone)).Trim();
+                }
+
+            }
+
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (Email1 + "\r\n" + Email2 + "\r\n" + Email3).Trim();
+                }
+            }
+
+            set
+            {
+                allEmails = value;
+            }
+        }
+
+        private string Clean(string phone)
+        {
+            if(phone == "" || phone == null)
+            {
+                return "";
+            }
+            else
+            {
+                return Regex.Replace(phone, "[ -()]", "");
+            }
+        }
     }
 }

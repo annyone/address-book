@@ -15,7 +15,7 @@ namespace address_book_tests
         {
             ContactData contact = new ContactData("firstname", "lastname")
             {
-                Workaddress = "workaddress",
+                Address = "workaddress",
                 Homephone = "homephone",
                 Mobilephone = "mobilephone",
                 Workphone = "workphone",
