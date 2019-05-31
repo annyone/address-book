@@ -130,7 +130,24 @@ namespace address_book_tests
                 }
                 else
                 {
-                    return (Clean(Homephone + "\r\n" + Mobilephone + "\r\n" + Workphone)).Trim();
+                    allPhones = "";
+
+                    if(Homephone != "")
+                    {
+                        AllPhones += Homephone + "\r\n";
+                    }
+
+                    if (Mobilephone != "")
+                    {
+                        AllPhones += Mobilephone + "\r\n";
+                    }
+
+                    if (Workphone != "")
+                    {
+                        AllPhones += Workphone + "\r\n";
+                    }
+
+                    return (Clean(AllPhones)).Trim();
                 }
 
             }
@@ -151,7 +168,24 @@ namespace address_book_tests
                 }
                 else
                 {
-                    return (Email1 + "\r\n" + Email2 + "\r\n" + Email3).Trim();
+                    allEmails = "";
+
+                    if (Email1 != "")
+                    {
+                        AllEmails += Email1 + "\r\n";
+                    }
+
+                    if (Email2 != "")
+                    {
+                        AllEmails += Email2 + "\r\n";
+                    }
+
+                    if (Email3 != "")
+                    {
+                        AllEmails += Email3 + "\r\n";
+                    }
+
+                    return (AllEmails).Trim();
                 }
             }
 

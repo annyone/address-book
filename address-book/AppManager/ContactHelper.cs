@@ -65,7 +65,17 @@ namespace address_book_tests
             };
 
         }
+/*
+        public ContactData GetContactInfoFromDetails(int index)
+        {
+            manager.Nav.OpenHomePage();
+            DetailsContactBtn(0);
+            string text = driver.FindElement(By.Id("content")).Text;
+            //return new ContactData(allInfo);
 
+
+        }
+*/
         public void IsContactExist()
         {
             if (driver.Url == baseURL
@@ -181,6 +191,13 @@ namespace address_book_tests
         public ContactHelper EditContactBtn(int index)
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index+1) + "]")).Click();
+
+            return this;
+        }
+
+        public ContactHelper DetailsContactBtn(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
 
             return this;
         }
