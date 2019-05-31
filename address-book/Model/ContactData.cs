@@ -9,12 +9,17 @@ namespace address_book_tests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string allEmails, allPhones;
+        private string allEmails, allPhones, detailsInfo;
 
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
+        }
+
+        public ContactData(string detailsinfo)
+        {
+            DetailsInfo = detailsInfo;
         }
 
         public bool Equals(ContactData other)
@@ -69,7 +74,7 @@ namespace address_book_tests
 
         public override string ToString()
         {
-            return "Firstname=" + Firstname + " Lastname=" + Lastname;
+            return "Lastname=" + Lastname;
         }
 
         public string Firstname { get; set; }
@@ -192,6 +197,78 @@ namespace address_book_tests
             set
             {
                 allEmails = value;
+            }
+        }
+
+        public string DetailsInfo
+        {
+            get
+            {
+                if (DetailsInfo != "")
+                {
+                    return detailsInfo;
+                }
+                else
+                {
+                    detailsInfo = "";
+
+                    if (Firstname != "")
+                    {
+                        detailsInfo += Firstname + " ";
+                    }
+
+                    if (Lastname != "")
+                    {
+                        detailsInfo += Lastname + "\r\n";
+                    }
+
+                    if (Address != "")
+                    {
+                        detailsInfo += Address + "\r\n\r\n";
+                    }
+
+                    if (Homephone !="" )
+                    {
+                        detailsInfo += "H: " + Clean(Homephone) + "\r\n";
+                    }
+                    
+                    if (Mobilephone != "")
+                    {
+                        detailsInfo += "M: " + Clean(Mobilephone) + "\r\n";
+                    }
+
+                    if (Workphone != "")
+                    {
+                        detailsInfo += "M: " + Clean(Workphone) + "\r\n";
+                    }
+
+                    if (Fax != "")
+                    {
+                        detailsInfo += "F: " + Clean(Fax) + "\r\n\r\n";
+                    }
+
+                    if (Email1 != "")
+                    {
+                        detailsInfo += Email1 + "\r\n";
+                    }
+
+                    if (Email2 != "")
+                    {
+                        detailsInfo += Email2 + "\r\n";
+                    }
+
+                    if (Email3 != "")
+                    {
+                        detailsInfo += Email3 + "\r\n";
+                    }
+
+                    return detailsInfo.Trim();
+                }
+            }
+
+            set
+            {
+                detailsInfo = value;
             }
         }
 

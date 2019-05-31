@@ -10,7 +10,7 @@ namespace address_book_tests
     class ContactInformationTests : AuthTestBase
     {
         [Test]
-        public void ContactInformationTest()
+        public void CompareContactInfoFromTableAndFormTest()
         {
             ContactData fromTable = app.Contacts.GetContactInfoFromTable(0);
             ContactData fromForm = app.Contacts.GetContactInfoFromForm(0);
@@ -19,6 +19,16 @@ namespace address_book_tests
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
+        }
+
+        [Test]
+        public void CompareContactInfoFromFormAndDetailsTest()
+        {
+            ContactData fromDetails = app.Contacts.GetContactInfoFromDetails(0);
+            ContactData fromForm = app.Contacts.GetContactInfoFromForm(0);
+
+           // Assert.AreEqual(fromDetails, fromForm);
+            Assert.AreEqual(fromDetails.DetailsInfo, fromForm.DetailsInfo);
         }
     }
 }
