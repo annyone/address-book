@@ -10,7 +10,21 @@ namespace address_book_tests
     [TestFixture]
     public class CreateGroupTests : AuthTestBase
     {
-        [Test]
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(50)
+                });
+            }
+            return groups;
+        }
+
+        [Test, TestCaseSource("RandomGroupDataProvider")]
         public void CreateGroupTest()
         {
             GroupData group = new GroupData("a", "b", "c");
@@ -24,19 +38,6 @@ namespace address_book_tests
             Assert.AreEqual(oldGroups, newGroups);
         }
 
-        [Test]
-        public void CreateGroupTestWithEmptyFields()
-        {
-            GroupData group = new GroupData("", "", "");
-
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.Create(group);
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-        }
 
         [Test]
         public void CreateGroupTestWithBadName()
