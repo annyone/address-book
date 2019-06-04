@@ -24,8 +24,8 @@ namespace address_book_tests
         [Test]
         public void CompareContactInfoFromFormAndDetailsTest()
         {
-            ContactData fromDetails = app.Contacts.GetContactInfoFromDetails(0);
-            ContactData fromForm = app.Contacts.GetContactInfoFromForm(0);
+            ContactData fromDetails = app.Contacts.GetContactInfoFromForm(0);
+            ContactData fromForm = app.Contacts.GetDetailsContactInfoFromForm(0);
 
            // Assert.AreEqual(fromDetails, fromForm);
             Assert.AreEqual(fromDetails.DetailsInfo, fromForm.DetailsInfo);

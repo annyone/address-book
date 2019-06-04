@@ -19,7 +19,7 @@ namespace address_book_tests
 
         public ContactData(string detailsinfo)
         {
-            DetailsInfo = detailsInfo;
+            DetailsInfo = detailsinfo;
         }
 
         public bool Equals(ContactData other)
@@ -204,7 +204,7 @@ namespace address_book_tests
         {
             get
             {
-                if (DetailsInfo != "")
+                if (detailsInfo != "")
                 {
                     return detailsInfo;
                 }
