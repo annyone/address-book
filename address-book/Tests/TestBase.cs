@@ -21,13 +21,11 @@ namespace address_book_tests
 
         public static string GenerateRandomString(int max)
         {
-            Random rnd = new Random();
             int l = Convert.ToInt32(rnd.NextDouble() * max);
             StringBuilder builder = new StringBuilder();
             for(int i = 0; i < l; i++)
             {
                 builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223))); 
-
             }
 
             return builder.ToString();

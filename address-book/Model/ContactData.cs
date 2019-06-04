@@ -74,7 +74,15 @@ namespace address_book_tests
 
         public override string ToString()
         {
-            return "Lastname=" + Lastname;
+            return "Lastname=" + Lastname + "\r"
+                + "Firstname=" + Firstname + "\r"
+                + "Address=" + Address + "\r"
+                + "Homephone=" + Homephone + "\r"
+                + "Mobilephone=" + Mobilephone + "\r"
+                + "Workphone=" + Workphone + "\r"
+                + "Email1=" + Email1 + "\r"
+                + "Email2=" + Email2 + "\r"
+                + "Email3=" + Email3;
         }
 
         public string Firstname { get; set; }

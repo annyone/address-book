@@ -52,7 +52,7 @@ namespace address_book_tests
 
         public override string ToString()
         {
-            return "name =" + Name;
+            return "Name=" + Name + "\rHeader=" + Header+ "\rFooter="+Footer;
         }
 
         public string Name { get; set; }
