@@ -25,9 +25,9 @@ namespace address_book_tests
         }
 
         [Test, TestCaseSource("RandomGroupDataProvider")]
-        public void CreateGroupTest()
+        public void CreateGroupTest(GroupData group)
         {
-            GroupData group = new GroupData("a", "b", "c");
+           // GroupData group = new GroupData("a", "b", "c");
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
