@@ -23,7 +23,7 @@ namespace address_book_tests
 
         private AppManager()
         {
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(@"C:\Windows\SysWOW64");
             baseURL = "http://localhost/addressbook/";
 
             userHelper = new UserHelper(this);

@@ -13,12 +13,12 @@ namespace address_book_tests
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                groups.Add(new GroupData(GenerateRandomString(30))
+                groups.Add(new GroupData(GenerateRandomString(10))
                 {
-                    Header = GenerateRandomString(100),
-                    Footer = GenerateRandomString(50)
+                    Header = GenerateRandomString(15),
+                    Footer = GenerateRandomString(5)
                 });
             }
             return groups;
