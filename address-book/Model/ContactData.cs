@@ -212,7 +212,7 @@ namespace address_book_tests
         {
             get
             {
-                if (detailsInfo != "")
+                if (detailsInfo != null)
                 {
                     return detailsInfo;
                 }
@@ -247,7 +247,7 @@ namespace address_book_tests
 
                     if (Workphone != "")
                     {
-                        detailsInfo += "M: " + Clean(Workphone) + "\r\n";
+                        detailsInfo += "W: " + Clean(Workphone) + "\r\n";
                     }
 
                     if (Fax != "")
