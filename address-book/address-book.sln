@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "address-book", "address-book.csproj", "{10CFF17F-2F52-4045-AF69-E424D50A700A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "address-book-data-generator", "..\address-book-data-generator\address-book-data-generator.csproj", "{9600093E-DB23-4BF2-9772-B8410CABB49D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10CFF17F-2F52-4045-AF69-E424D50A700A} = {10CFF17F-2F52-4045-AF69-E424D50A700A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

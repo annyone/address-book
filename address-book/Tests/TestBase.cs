@@ -22,8 +22,8 @@ namespace address_book_tests
         public static string GenerateRandomString(int max)
         {
             string letter;
-            var chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz ";
-            int pos = 0;
+            var chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789 ";
+            int pos;
 
             StringBuilder builder = new StringBuilder();
 
@@ -35,18 +35,6 @@ namespace address_book_tests
 
             }
 
-
-            /*
-
-
-
-            int l = Convert.ToInt32(rnd.NextDouble() * max);
-            StringBuilder builder = new StringBuilder("ABC");
-            for(int i = 0; i < l; i++)
-            {
-                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223))); 
-            }
-            */
             return builder.ToString();
         }
     }

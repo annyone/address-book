@@ -11,6 +11,10 @@ namespace address_book_tests
     {
         private string allEmails, allPhones, detailsInfo;
 
+        public ContactData()
+        {
+        }
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;

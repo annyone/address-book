@@ -11,7 +11,7 @@ namespace address_book_tests
 { 
     public class ContactHelper : BaseHelper
     {
-        private string baseURL;
+        private readonly string baseURL;
         public ContactHelper(AppManager manager, string baseURL) 
             : base(manager)
         {

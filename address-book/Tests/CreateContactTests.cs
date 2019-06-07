@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Threading;
 using NUnit.Framework;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace address_book_tests
 {
@@ -29,6 +32,28 @@ namespace address_book_tests
             }
 
             return contacts;
+        }
+
+        public static IEnumerable<ContactData> GroupDataFromCsvFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contact.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contacts.Add(new ContactData(parts[0], parts[1]));
+            }
+
+            return contacts;
+        }
+
+        public static IEnumerable<ContactData> GroupDataFromXmlFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader(@"contact.xml"));
+
         }
 
         [Test, TestCaseSource("RandomContactDataProvider")]
