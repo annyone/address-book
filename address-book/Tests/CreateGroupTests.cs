@@ -7,27 +7,13 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace address_book_tests
 {
     [TestFixture]
     public class CreateGroupTests : AuthTestBase
     {
-     /*   public static IEnumerable<GroupData> RandomGroupDataProvider()
-        {
-            List<GroupData> groups = new List<GroupData>();
-            for (int i = 0; i < 3; i++)
-            {
-                groups.Add(new GroupData(GenerateRandomString(10))
-                {
-                    Header = GenerateRandomString(15),
-                    Footer = GenerateRandomString(5)
-                });
-            }
-            return groups;
-        }
-        */
-
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -50,7 +36,13 @@ namespace address_book_tests
 
         }
 
-        [Test, TestCaseSource("GroupDataFromXmlFile")]
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                File.ReadAllText(@"group.json"));
+        }
+
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void CreateGroupTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();

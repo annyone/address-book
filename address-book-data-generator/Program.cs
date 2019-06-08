@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using address_book_tests;
+using Newtonsoft.Json;
 
 namespace address_book_data_generator
 {
@@ -18,20 +19,42 @@ namespace address_book_data_generator
             int count = Convert.ToInt32(args[1]);
             StreamWriter writer = new StreamWriter(args[2]);
             string format = args[3];
-            List<GroupData> groups = new List<GroupData>();
-            List<ContactData> contacts = new List<ContactData>();
 
-            for (int i = 0; i < count; i++)
+            if (dataType == "groups")
             {
-                if (dataType == "groups")
-                {   
+                List<GroupData> groups = new List<GroupData>();
+
+                for (int i = 0; i < count; i++)
+                {
                     groups.Add(new GroupData(TestBase.GenerateRandomString(5))
                     {
                         Header = TestBase.GenerateRandomString(10),
                         Footer = TestBase.GenerateRandomString(5)
                     });
                 }
-                else if (dataType == "contacts")
+
+                if (format == "csv")
+                {
+                    WriteGroupDataToCsvFile(groups, writer);
+                }
+                else if (format == "xml")
+                {
+                    WriteGroupDataToXmlFile(groups, writer);
+                }
+                else if (format == "json")
+                {
+                    WriteGroupDataToJsonFile(groups, writer);
+                }
+                else
+                {
+                    System.Console.Out.Write("Bad format:" + format);
+                }
+            }
+            else if (dataType == "contacts")
+            {
+                List<ContactData> contacts = new List<ContactData>();
+
+                for (int i = 0; i < count; i++)
                 {
                     contacts.Add(new ContactData(TestBase.GenerateRandomString(5), TestBase.GenerateRandomString(5))
                     {
@@ -45,31 +68,29 @@ namespace address_book_data_generator
                         Email3 = TestBase.GenerateRandomString(5) + "@" + TestBase.GenerateRandomString(5)
                     });
                 }
+
+                if (format == "csv")
+                {
+                    WriteContactDataToCsvFile(contacts, writer);
+                }
+                else if (format == "xml")
+                {
+                    WriteContactDataToXmlFile(contacts, writer);
+                }
+                else if (format == "json")
+                {
+                    WriteContactDataToJsonFile(contacts, writer);
+                }
                 else
                 {
-                    System.Console.Out.Write("Bad data type:" + dataType);
+                    System.Console.Out.Write("Bad format:" + format);
                 }
-            }
-
-            if(format == "csv")
-            {
-                WriteGroupDataToCsvFile(groups, writer);
-                WriteContactDataToCsvFile(contacts, writer);
-            }
-            else if (format == "xml")
-            {
-                WriteGroupDataToXmlFile(groups, writer);
-                WriteContactDataToXmlFile(contacts, writer);
-            }
-            else
-            {
-                System.Console.Out.Write("Bad format:" + format);
             }
 
             writer.Close();
         }
 
-        static  void WriteGroupDataToCsvFile(List<GroupData> groups, StreamWriter writer)
+        static void WriteGroupDataToCsvFile(List<GroupData> groups, StreamWriter writer)
         {
             foreach (GroupData group in groups)
             {
@@ -81,6 +102,11 @@ namespace address_book_data_generator
         static void WriteGroupDataToXmlFile(List<GroupData> groups, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
+        }
+
+        static void WriteGroupDataToJsonFile(List<GroupData> groups, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
         }
 
         static void WriteContactDataToCsvFile(List<ContactData> contacts, StreamWriter writer)
@@ -96,6 +122,11 @@ namespace address_book_data_generator
         {
             new XmlSerializer(typeof(List<ContactData>)).Serialize(writer, contacts);
 
+        }
+
+        static void WriteContactDataToJsonFile(List<ContactData> contacts, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }

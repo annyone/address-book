@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace address_book_tests
 {
@@ -139,7 +140,7 @@ namespace address_book_tests
 
         public string Notes { get; set; }
 
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public string AllPhones
         {
             get
@@ -178,7 +179,7 @@ namespace address_book_tests
             }
         }
 
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public string AllEmails
         {
             get
@@ -216,7 +217,7 @@ namespace address_book_tests
             }
         }
 
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public string DetailsInfo
         {
             get
