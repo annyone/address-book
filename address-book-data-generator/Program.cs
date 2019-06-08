@@ -33,7 +33,17 @@ namespace address_book_data_generator
                 }
                 else if (dataType == "contacts")
                 {
-                    contacts.Add(new ContactData(TestBase.GenerateRandomString(5), TestBase.GenerateRandomString(5)));
+                    contacts.Add(new ContactData(TestBase.GenerateRandomString(5), TestBase.GenerateRandomString(5))
+                    {
+                        Address = TestBase.GenerateRandomString(15),
+                        Homephone = Convert.ToString(TestBase.rnd.Next(00000, 29999)),
+                        Mobilephone = Convert.ToString(TestBase.rnd.Next(30000, 59999)),
+                        Workphone = Convert.ToString(TestBase.rnd.Next(60000, 79999)),
+                        Fax = Convert.ToString(TestBase.rnd.Next(80000, 99999)),
+                        Email1 = TestBase.GenerateRandomString(5) + "@" + TestBase.GenerateRandomString(5),
+                        Email2 = TestBase.GenerateRandomString(5) + "@" + TestBase.GenerateRandomString(5),
+                        Email3 = TestBase.GenerateRandomString(5) + "@" + TestBase.GenerateRandomString(5)
+                    });
                 }
                 else
                 {

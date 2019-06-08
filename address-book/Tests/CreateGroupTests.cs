@@ -13,7 +13,7 @@ namespace address_book_tests
     [TestFixture]
     public class CreateGroupTests : AuthTestBase
     {
-        public static IEnumerable<GroupData> RandomGroupDataProvider()
+     /*   public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
             for (int i = 0; i < 3; i++)
@@ -26,6 +26,7 @@ namespace address_book_tests
             }
             return groups;
         }
+        */
 
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
@@ -48,7 +49,6 @@ namespace address_book_tests
                 .Deserialize(new StreamReader(@"group.xml"));
 
         }
-
 
         [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void CreateGroupTest(GroupData group)

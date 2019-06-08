@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace address_book_tests
 {
@@ -137,6 +139,7 @@ namespace address_book_tests
 
         public string Notes { get; set; }
 
+        [XmlIgnore]
         public string AllPhones
         {
             get
@@ -175,6 +178,7 @@ namespace address_book_tests
             }
         }
 
+        [XmlIgnore]
         public string AllEmails
         {
             get
@@ -212,6 +216,7 @@ namespace address_book_tests
             }
         }
 
+        [XmlIgnore]
         public string DetailsInfo
         {
             get

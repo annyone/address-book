@@ -2,8 +2,8 @@
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +13,7 @@ namespace address_book_tests
     [TestFixture]
     public class CreateContactTests : AuthTestBase
     {
-        public static IEnumerable<ContactData> RandomContactDataProvider()
+      /*  public static IEnumerable<ContactData> RandomContactDataProvider()
         {
             List<ContactData> contacts = new List<ContactData>();
             for (int i = 0; i < 3; i++)
@@ -33,8 +33,8 @@ namespace address_book_tests
 
             return contacts;
         }
-
-        public static IEnumerable<ContactData> GroupDataFromCsvFile()
+        */
+        public static IEnumerable<ContactData> ContactDataFromCsvFile()
         {
             List<ContactData> contacts = new List<ContactData>();
             string[] lines = File.ReadAllLines(@"contact.csv");
@@ -47,16 +47,15 @@ namespace address_book_tests
             return contacts;
         }
 
-        public static IEnumerable<ContactData> GroupDataFromXmlFile()
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
         {
             List<ContactData> contacts = new List<ContactData>();
             return (List<ContactData>)
                 new XmlSerializer(typeof(List<ContactData>))
                 .Deserialize(new StreamReader(@"contact.xml"));
-
         }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void CreateContactTest(ContactData contact)
         {
             List<ContactData> oldContacts = app.Contacts.GetContactList();
