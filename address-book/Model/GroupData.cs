@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace address_book_tests
 {
+    [Table(Name = "group_list")]
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         public GroupData()
         {
         }
 
-        public GroupData (string name)
+        public GroupData(string name)
         {
             Name = name;
         }
@@ -26,12 +28,12 @@ namespace address_book_tests
 
         public bool Equals(GroupData other)
         {
-            if(Object.ReferenceEquals(other, null))
+            if (Object.ReferenceEquals(other, null))
             {
                 return false;
             }
 
-            if(Object.ReferenceEquals(this, other))
+            if (Object.ReferenceEquals(this, other))
             {
                 return true;
             }
@@ -56,13 +58,29 @@ namespace address_book_tests
 
         public override string ToString()
         {
-            return "Name=" + Name + "\rHeader=" + Header+ "\rFooter="+Footer;
+            return "Name=" + Name + "\rHeader=" + Header + "\rFooter=" + Footer;
         }
 
+        [Column(Name = "group_name")]
         public string Name { get; set; }
 
+        [Column(Name = "group_header")]
         public string Header { get; set; }
 
+        [Column(Name = "group_footer")]
         public string Footer { get; set; }
+
+        [Column(Name = "group_id"), PrimaryKey, Identity]
+        public string Id { get; set; }
+
+        public static List<GroupData> GetAllFromDB()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Groups select g).ToList();
+            }
+
+        }
+
     }
 }

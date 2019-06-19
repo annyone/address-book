@@ -68,7 +68,7 @@ namespace address_book_tests
             manager.Nav.OpenGroupsPage();
         }
 
-        public void Delete(int id)
+        public GroupHelper Delete(int id)
         {
             manager.Nav.OpenGroupsPage();
             if (driver.Url == baseURL + "group.php"
@@ -80,6 +80,23 @@ namespace address_book_tests
             SelectGroup(id);
             DeleteGroupBtn();
             manager.Nav.ReturnToGroupsPage();
+            return this;
+        }
+
+        public GroupHelper Delete(GroupData group)
+        {
+            manager.Nav.OpenGroupsPage();
+            if (driver.Url == baseURL + "group.php"
+                && !IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData newGroup = new GroupData("a", "b", "c");
+                Create(newGroup);
+            }
+            SelectGroup(group.Id);
+            DeleteGroupBtn();
+            manager.Nav.ReturnToGroupsPage();
+
+            return this;
         }
 
         //кнопки, формы
@@ -126,6 +143,13 @@ namespace address_book_tests
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+
+            return this;
+        }
+
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
 
             return this;
         }
