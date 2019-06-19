@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace address_book_tests
 {
     [TestFixture]
-    public class CreateGroupTests : AuthTestBase
+    public class CreateGroupTests : GroupTestBase
     {
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
@@ -45,9 +45,9 @@ namespace address_book_tests
         [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void CreateGroupTest(GroupData group)
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAllFromDB();
             app.Groups.Create(group);
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAllFromDB();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
@@ -60,9 +60,9 @@ namespace address_book_tests
         {
             GroupData group = new GroupData("a'a", "", "");
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAllFromDB();
             app.Groups.Create(group);
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAllFromDB();
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);

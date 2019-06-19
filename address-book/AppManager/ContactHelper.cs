@@ -149,6 +149,17 @@ namespace address_book_tests
             manager.Nav.OpenHomePage();
         }
 
+        public ContactHelper Delete(ContactData contact)
+        {
+            manager.Nav.OpenHomePage();
+            SelectContact(contact.Id);
+            DeleteContactBtn();
+            driver.SwitchTo().Alert().Accept();
+            manager.Nav.OpenHomePage();
+
+            return this;
+        }
+
         public void Create(ContactData contact)
         {
             manager.Nav.OpenHomePage();
@@ -205,6 +216,13 @@ namespace address_book_tests
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+
+            return this;
+        }
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
 
             return this;
         }

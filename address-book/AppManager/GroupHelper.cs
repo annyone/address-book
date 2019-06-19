@@ -147,7 +147,7 @@ namespace address_book_tests
             return this;
         }
 
-        public GroupHelper SelectGroup(String id)
+        public GroupHelper SelectGroup(string id)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
 

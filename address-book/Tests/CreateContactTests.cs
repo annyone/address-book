@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace address_book_tests
 {
     [TestFixture]
-    public class CreateContactTests : AuthTestBase
+    public class CreateContactTests : ContactTestBase
     {
         public static IEnumerable<ContactData> ContactDataFromCsvFile()
         {
@@ -44,9 +44,9 @@ namespace address_book_tests
         [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void CreateContactTest(ContactData contact)
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAllFromDB();
             app.Contacts.Create(contact);
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAllFromDB();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();

@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace address_book_tests
 {
     [TestFixture]
-    public class EditContactTests : AuthTestBase
+    public class EditContactTests : ContactTestBase
     {
         [Test]
         public void EditContactTest()
@@ -20,10 +20,10 @@ namespace address_book_tests
 
             app.Nav.OpenHomePage();
             app.Contacts.IsContactExist();
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAllFromDB();
             app.Contacts.Edit(0, newValue);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAllFromDB();
             oldContacts[0].Lastname = newValue.Lastname;
             oldContacts[0].Firstname = newValue.Firstname;
             oldContacts.Sort();

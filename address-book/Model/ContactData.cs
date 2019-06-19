@@ -7,9 +7,11 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using LinqToDB.Mapping;
 
 namespace address_book_tests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allEmails, allPhones, detailsInfo;
@@ -92,53 +94,80 @@ namespace address_book_tests
                 + "Email3=" + Email3;
         }
 
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
 
+        [Column(Name = "middlename")]
         public string Middlename { get; set; }
 
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
 
+        [Column(Name = "nickname")]
         public string Nickname { get; set; }
 
+        [Column(Name = "title")]
         public string Title { get; set; }
 
+        [Column(Name = "company")]
         public string Company { get; set; }
 
+        [Column(Name = "address")]
         public string Address { get; set; }
 
+        [Column(Name = "home")]
         public string Homephone { get; set; }
 
+        [Column(Name = "mobile")]
         public string Mobilephone { get; set; }
 
+        [Column(Name = "work")]
         public string Workphone { get; set; }
 
+        [Column(Name = "fax")]
         public string Fax { get; set; }
 
+        [Column(Name = "email")]
         public string Email1 { get; set; }
 
+        [Column(Name = "email2")]
         public string Email2 { get; set; }
 
+        [Column(Name = "email3")]
         public string Email3 { get; set; }
 
+        [Column(Name = "homepage")]
         public string Homepage { get; set; }
 
+        [Column(Name = "bday")]
         public string Bday { get; set; }
 
+        [Column(Name = "bmonth")]
         public string Bmonth { get; set; }
 
+        [Column(Name = "byear")]
         public string Byear { get; set; }
 
+        [Column(Name = "aday")]
         public string Aday { get; set; }
 
+        [Column(Name = "amonth")]
         public string Amonth { get; set; }
 
+        [Column(Name = "ayear")]
         public string Ayear { get; set; }
 
+        [Column(Name = "address2")]
         public string Homeaddress { get; set; }
 
+        [Column(Name = "phone2")]
         public string Phone2 { get; set; }
 
+        [Column(Name = "notes")]
         public string Notes { get; set; }
+
+        [Column(Name = "id"), PrimaryKey, Identity]
+        public string Id { get; set; }
 
         [XmlIgnore, JsonIgnore]
         public string AllPhones
@@ -300,6 +329,15 @@ namespace address_book_tests
             {
                 return Regex.Replace(phone, "[ -()]", "");
             }
+        }
+
+        public static List<ContactData> GetAllFromDB()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts select c).ToList();
+            }
+
         }
     }
 }

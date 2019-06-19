@@ -8,21 +8,28 @@ using NUnit.Framework;
 namespace address_book_tests
 {
     [TestFixture]
-    public class DeleteContactTests : AuthTestBase
+    public class DeleteContactTests : ContactTestBase
     {
         [Test]
         public void DeleteContactTest()
         {
             app.Nav.OpenHomePage();
             app.Contacts.IsContactExist();
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.Delete(0);
+            List<ContactData> oldContacts = ContactData.GetAllFromDB();
+            ContactData forRemove = oldContacts[0];
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            app.Contacts.Delete(forRemove);
+
+            List<ContactData> newContacts = ContactData.GetAllFromDB();
             oldContacts.RemoveAt(0);
-            oldContacts.Sort();
-            newContacts.Sort();
+            //oldContacts.Sort();
+            //newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreEqual(contact.Id, forRemove.Id);
+            }
         }
     }
 }

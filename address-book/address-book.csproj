@@ -83,6 +83,7 @@
     <Compile Include="Model\AddressBookDB.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactInformationTests.cs" />
+    <Compile Include="Tests\ContactTestBase.cs" />
     <Compile Include="Tests\DeleteContactTests.cs" />
     <Compile Include="Tests\EditContactTests.cs" />
     <Compile Include="Tests\EditGroupTests.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Model\GroupData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\CreateGroupTests.cs" />
+    <Compile Include="Tests\GroupTestBase.cs" />
     <Compile Include="Tests\LogInTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\TestBase.cs" />

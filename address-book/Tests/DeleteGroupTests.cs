@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace address_book_tests
 {
     [TestFixture]
-    public class DeleteGroupTests : AuthTestBase
+    public class DeleteGroupTests : GroupTestBase
     {
         [Test]
         public void DeleteGroupTest()
@@ -17,9 +17,7 @@ namespace address_book_tests
             app.Groups.IsGroupExist();
             List<GroupData> oldGroups = GroupData.GetAllFromDB();
             GroupData forRemove = oldGroups[0];
-            //app.Groups.Remove(forRemove);
-
-            app.Groups.Delete(forRemove); // 1
+            app.Groups.Delete(forRemove);
             List<GroupData> newGroups = GroupData.GetAllFromDB();
             oldGroups.RemoveAt(0);
             oldGroups.Sort();

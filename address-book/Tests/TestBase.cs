@@ -9,6 +9,8 @@ namespace address_book_tests
 {
     public class TestBase
     {
+        public static bool PERFORM_LONG_UI_CHECKS = true;
+
         protected AppManager app;
 
         [SetUp]
