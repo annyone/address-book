@@ -81,9 +81,12 @@
     <Compile Include="AppManager\NavHelper.cs" />
     <Compile Include="AppManager\UserHelper.cs" />
     <Compile Include="Model\AddressBookDB.cs" />
+    <Compile Include="Model\GroupContactLink.cs" />
+    <Compile Include="Tests\AddContactToGroupTests.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactInformationTests.cs" />
     <Compile Include="Tests\ContactTestBase.cs" />
+    <Compile Include="Tests\DeleteContactFromGroupTests.cs" />
     <Compile Include="Tests\DeleteContactTests.cs" />
     <Compile Include="Tests\EditContactTests.cs" />
     <Compile Include="Tests\EditGroupTests.cs" />

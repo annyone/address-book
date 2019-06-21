@@ -21,7 +21,7 @@ namespace address_book_tests
             app.Nav.OpenHomePage();
             app.Contacts.IsContactExist();
             List<ContactData> oldContacts = ContactData.GetAllFromDB();
-            app.Contacts.Edit(0, newValue);
+            app.Contacts.Edit(oldContacts[0], newValue);
 
             List<ContactData> newContacts = ContactData.GetAllFromDB();
             oldContacts[0].Lastname = newValue.Lastname;

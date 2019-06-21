@@ -28,7 +28,7 @@ namespace address_book_tests
 
             foreach (ContactData contact in newContacts)
             {
-                Assert.AreEqual(contact.Id, forRemove.Id);
+                Assert.AreNotEqual(contact.Id, forRemove.Id);
             }
         }
     }

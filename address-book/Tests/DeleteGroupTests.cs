@@ -26,7 +26,7 @@ namespace address_book_tests
 
             foreach(GroupData group in newGroups)
             {
-                Assert.AreEqual(group.Id, forRemove.Id);
+                Assert.AreNotEqual(group.Id, forRemove.Id);
             }
 
         }

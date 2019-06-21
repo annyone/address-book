@@ -104,6 +104,49 @@ namespace address_book_tests
             return new ContactData(text);
         }
 
+        internal void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Nav.OpenHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            SubmitAddContactToGroupBtn();
+        }
+
+        internal void DeleteContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Nav.OpenHomePage();
+            SelectGroup(group.Name);
+            SelectContact(contact.Id);
+            DeleteContactFromGroupBtn();
+
+        }
+
+        private void SelectGroup(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
+        }
+
+        private void DeleteContactFromGroupBtn()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        private void SubmitAddContactToGroupBtn()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
         public void IsContactExist()
         {
             if (driver.Url == baseURL
@@ -132,9 +175,9 @@ namespace address_book_tests
             return new List<ContactData>(contactCache);
         }
 
-        public void Edit(int id, ContactData newValue)
+        public void Edit(ContactData contact, ContactData newValue)
         {
-            EditContactBtn(id);
+            EditContactBtn(contact.Id);
             FillContactForm(newValue);
             SubmitEditContactForm();
             manager.Nav.OpenHomePage();
@@ -222,7 +265,7 @@ namespace address_book_tests
 
         public ContactHelper SelectContact(string id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
+            driver.FindElement(By.Id(id)).Click();
 
             return this;
         }
@@ -238,6 +281,12 @@ namespace address_book_tests
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index+1) + "]")).Click();
 
+            return this;
+        }
+
+        public ContactHelper EditContactBtn(string id)
+        {
+            driver.FindElement(By.XPath("//a[@href='http://localhost/addressbook/edit.php?id=58']"));
             return this;
         }
 

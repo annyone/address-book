@@ -58,10 +58,10 @@ namespace address_book_tests
             return this;
         }
 
-        public void Edit(int id, GroupData newValue)
+        public void Edit(GroupData group, GroupData newValue)
         {
             manager.Nav.OpenGroupsPage();
-            SelectGroup(id);
+            SelectGroup(group.Id);
             EditGroupBtn();
             FillGroupForm(newValue);
             SubmitEditGroupForm();

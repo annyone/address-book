@@ -17,7 +17,7 @@ namespace address_book_tests
             app.Nav.OpenGroupsPage();
             app.Groups.IsGroupExist();
             List<GroupData> oldGroups = GroupData.GetAllFromDB();
-            app.Groups.Edit(0, newValue);
+            app.Groups.Edit(oldGroups[0], newValue);
             List<GroupData> newGroups = GroupData.GetAllFromDB();
             oldGroups[0].Name = newValue.Name;
             oldGroups.Sort();
@@ -32,7 +32,7 @@ namespace address_book_tests
             app.Nav.OpenGroupsPage();
             app.Groups.IsGroupExist();
             List<GroupData> oldGroups = GroupData.GetAllFromDB();
-            app.Groups.Edit(0, newValue);
+            app.Groups.Edit(oldGroups[0], newValue);
             List<GroupData> newGroups = GroupData.GetAllFromDB();
             oldGroups[0].Name = newValue.Name;
             oldGroups.Sort();
