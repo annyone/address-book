@@ -110,7 +110,7 @@ namespace address_book_tests
             ClearGroupFilter();
             SelectContact(contact.Id);
             SelectGroupToAdd(group.Name);
-            SubmitAddContactToGroupBtn();
+            AddContactToGroupBtn();
         }
 
         internal void DeleteContactFromGroup(ContactData contact, GroupData group)
@@ -119,7 +119,6 @@ namespace address_book_tests
             SelectGroup(group.Name);
             SelectContact(contact.Id);
             DeleteContactFromGroupBtn();
-
         }
 
         private void SelectGroup(string name)
@@ -132,7 +131,7 @@ namespace address_book_tests
             driver.FindElement(By.Name("remove")).Click();
         }
 
-        private void SubmitAddContactToGroupBtn()
+        private void AddContactToGroupBtn()
         {
             driver.FindElement(By.Name("add")).Click();
         }
@@ -286,7 +285,7 @@ namespace address_book_tests
 
         public ContactHelper EditContactBtn(string id)
         {
-            driver.FindElement(By.XPath("//a[@href='http://localhost/addressbook/edit.php?id=58']"));
+            driver.FindElement(By.XPath("//a[@href='edit.php?id=" + id + "']")).Click();
             return this;
         }
 
