@@ -13,10 +13,17 @@ namespace address_book_tests
         [Test]
         public void AddContactToGroupTest()
         {
-            GroupData group = GroupData.GetAllFromDB()[0];
-            List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAllFromDB().Except(group.GetContacts()).First();
+            app.Contacts.IsContactExist();
+            app.Groups.IsGroupExist();
 
+            GroupData group = GroupData.GetAllFromDB()[0];
+            ContactData contact = ContactData.GetAllFromDB()[0];
+            List<ContactData> oldList = group.GetContacts();
+            List<GroupData> allGroups = contact.GetGroups();
+            app.Contacts.IsAbleToAddInGroup(allGroups);
+
+            contact = ContactData.GetAllFromDB().Except(group.GetContacts()).First();
+            
             app.Contacts.AddContactToGroup(contact, group);
 
             List<ContactData> newList = group.GetContacts();

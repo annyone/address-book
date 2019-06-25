@@ -157,6 +157,25 @@ namespace address_book_tests
             return;
         }
 
+        public void IsAbleToAddInGroup(List<GroupData> groupContactList)
+        {
+            List<GroupData> allGroups = GroupData.GetAllFromDB();
+
+            if (allGroups.Count.Equals(groupContactList.Count))
+            {
+                ContactData contact = new ContactData("firstname", "lastname");
+                Create(contact);
+            }
+        }
+
+        public void IsAddedInGroup(ContactData contact, List<ContactData> groupList, GroupData group)
+        {
+            if(groupList.Count == 0)
+            {
+                AddContactToGroup(contact, group);
+            }
+        }
+
         private List<ContactData> contactCache = null;
 
         public List<ContactData> GetContactList()

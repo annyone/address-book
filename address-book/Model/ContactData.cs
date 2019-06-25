@@ -342,5 +342,25 @@ namespace address_book_tests
             }
 
         }
+
+        public List<GroupData> GetGroups()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+
+                var query = from g in db.Groups
+                            join t in db.GroupContactLink on g.Id equals t.GroupId
+                            where t.ContactId == Id
+                            select g;
+                /*
+                            from groupcontactlink in db.GroupContactLink.Where(
+                                p => p.ContactId == Id
+                                && p.GroupId == g.Id)
+                            select g;
+                            */
+
+                return query.Distinct().ToList();
+            }
+        }
     }
 }

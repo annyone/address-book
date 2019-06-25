@@ -13,9 +13,13 @@ namespace address_book_tests
         [Test]
         public void DeleteContactFromGroupTest()
         {
+            app.Contacts.IsContactExist();
+            app.Groups.IsGroupExist();
+
             GroupData group = GroupData.GetAllFromDB()[0];
             List<ContactData> oldList = group.GetContacts();
             ContactData contact = ContactData.GetAllFromDB().First();
+            app.Contacts.IsAddedInGroup(contact, oldList, group);
 
             app.Contacts.DeleteContactFromGroup(contact, group);
 
